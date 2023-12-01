@@ -7,9 +7,14 @@ def seed_item_repository(db_connection):
     db_connection.seed("seeds/create_tables.sql")
 
 
+def repo_instance_contrusctor(db_connection):
+    repo = ItemRepository(db_connection)
+    return repo
+
+
 def test_add_item(db_connection):
     seed_item_repository(db_connection)
-    repo = ItemRepository(db_connection)
+    repo = repo_instance_contrusctor(db_connection)
 
     repo.add_item("AirPods Pro", 220, 40)
     repo.add_item("Sony TV", 1500, 20)
@@ -30,7 +35,7 @@ def test_add_item(db_connection):
 
 def test_find_item_by_name(db_connection):
     seed_item_repository(db_connection)
-    repo = ItemRepository(db_connection)
+    repo = repo_instance_contrusctor(db_connection)
 
     item = repo.find_item_by_name("iPhone 15")
     assert item == Item("iPhone 15", "799.99", 50)
@@ -38,7 +43,7 @@ def test_find_item_by_name(db_connection):
 
 def test_find_nonexistent_item_by_name(db_connection):
     seed_item_repository(db_connection)
-    repo = ItemRepository(db_connection)
+    repo = repo_instance_contrusctor(db_connection)
 
     with pytest.raises(ValueError) as err:
         repo.find_item_by_name("Non-existent Item")
@@ -47,7 +52,7 @@ def test_find_nonexistent_item_by_name(db_connection):
 
 def test_update_item(db_connection):
     seed_item_repository(db_connection)
-    repo = ItemRepository(db_connection)
+    repo = repo_instance_contrusctor(db_connection)
 
     repo.update_item("iPhone 15", 899.99, 60)
 
@@ -67,7 +72,7 @@ def test_update_item(db_connection):
 
 def test_delete_item(db_connection):
     seed_item_repository(db_connection)
-    repo = ItemRepository(db_connection)
+    repo = repo_instance_contrusctor(db_connection)
 
     repo.delete_item("iPhone 15")
 
@@ -84,7 +89,7 @@ def test_delete_item(db_connection):
 
 def test_return_quantity_of_item(db_connection):
     seed_item_repository(db_connection)
-    repo = ItemRepository(db_connection)
+    repo = repo_instance_contrusctor(db_connection)
 
     quantity = repo.return_quantity_of_item("iPhone 15")
     assert quantity == 50
