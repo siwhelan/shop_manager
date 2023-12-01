@@ -1,4 +1,6 @@
-DROP TABLE IF EXISTS "items"."orders" CASCADE;
+DROP TABLE IF EXISTS item_orders CASCADE;
+DROP TABLE IF EXISTS items CASCADE;
+DROP TABLE IF EXISTS orders CASCADE;
 
 CREATE TABLE items (
   id SERIAL PRIMARY KEY,
@@ -52,4 +54,3 @@ VALUES
 (3, 3), -- Sony Headphones bought by Carolyn Bessette
 (4, 4), -- Samsung Galaxy S21 bought by David Brown
 (5, 5); -- iPad Pro bought by Eva Smith
-```

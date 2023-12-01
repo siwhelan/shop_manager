@@ -70,7 +70,7 @@ Table: orders
 id: SERIAL
 name: text
 order_date: date
-quantity: int
+quantity: int -- track in item_orders
 
 ```
 
@@ -103,18 +103,16 @@ CREATE TABLE items (
   quantity int
 );
 
--- Create the second table.
 CREATE TABLE orders (
   id SERIAL PRIMARY KEY,
-  name text,
-  order_date date,
-  quantity int
+  name text, -- customer name
+  order_date date
 );
 
--- Create the join table.
 CREATE TABLE item_orders (
   item_id int,
   order_id int,
+  quantity int, -- quantity of each item in an order
   constraint fk_item foreign key(item_id) references items(id) on delete cascade,
   constraint fk_order foreign key(order_id) references orders(id) on delete cascade,
   PRIMARY KEY (item_id, order_id)
