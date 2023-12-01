@@ -13,8 +13,7 @@ CREATE TABLE items (
 CREATE TABLE orders (
   id SERIAL PRIMARY KEY,
   name text,
-  order_date date,
-  quantity int
+  order_date date
 );
 
 -- Create the join table.
